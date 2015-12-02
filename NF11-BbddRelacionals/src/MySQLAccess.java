@@ -11,6 +11,7 @@ import java.util.Date;
 public class MySQLAccess {
   private Connection connect = null;
   private Statement statement = null;
+  private PreparedStatement pStatement = null;
   private ResultSet resultSet = null;
 
   public void readDataBase() throws Exception {
@@ -63,15 +64,15 @@ public class MySQLAccess {
 		String query = "insert into test.comments (myuser, email, webpage ,summary, datum, comments) values (?,?,?,?,?,?)";
 		try{
 			Date hoy = new java.util.Date();
-			PreparedStatement statement = connect.prepareStatement(query);
-			statement.setString(1, user);
-			statement.setString(2, mail);
-			statement.setString(3, web);
-			statement.setString(4, summary);
-			statement.setDate(5, new java.sql.Date(hoy.getTime()));
-			statement.setString(6, comment);
+			pStatement = connect.prepareStatement(query);
+			pStatement.setString(1, user);
+			pStatement.setString(2, mail);
+			pStatement.setString(3, web);
+			pStatement.setString(4, summary);
+			pStatement.setDate  (5, new java.sql.Date(hoy.getTime()));
+			pStatement.setString(6, comment);
 			
-			if (statement.executeUpdate() == 1){
+			if (pStatement.executeUpdate() == 1){
 				System.out.println("Se ha insertado el registro\n");	
 			}
 		}catch (SQLException e){
@@ -87,17 +88,17 @@ public class MySQLAccess {
       // also possible to get the columns via the column number
       // which starts at 1
       // e.g. resultSet.getSTring(2);
-      String user = resultSet.getString("myuser");
+      String user    = resultSet.getString("myuser");
       String website = resultSet.getString("webpage");
       String summary = resultSet.getString("summary");
-      Date date = resultSet.getDate("datum");
+      Date date      = resultSet.getDate("datum");
       String comment = resultSet.getString("comments");
-      System.out.println("User: " + user);
-      System.out.println("Website: " + website);
-      System.out.println("Summary: " + summary);
-      System.out.println("Date: " + date);
-      System.out.println("Comment: " + comment);
-      System.out.println("---------------------------");
+      System.out.println("\tUser: "    + user);
+      System.out.println("\tWebsite: " + website);
+      System.out.println("\tSummary: " + summary);
+      System.out.println("\tDate: "    + date);
+      System.out.println("\tComment: " + comment);
+      System.out.println("\t---------------------------");
     }
   }
 
