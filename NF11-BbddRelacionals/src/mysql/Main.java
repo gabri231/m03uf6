@@ -1,6 +1,4 @@
-/**
- * 
- */
+package mysql;
 
 /**
  * @author iaw26567249
@@ -13,13 +11,11 @@ public class Main {
 	 * @throws Exception 
 	 */
 	public static void main(String[] args){
-		// TODO Auto-generated method stub
-
 		try {
+			// Se instancia la clase MySQLAccess
 			MySQLAccess dao = new MySQLAccess();
 			dao.readDataBase();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
