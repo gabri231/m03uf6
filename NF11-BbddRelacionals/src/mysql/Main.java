@@ -13,7 +13,7 @@ public class Main {
 	public static void main(String[] args){
 		try {
 			// Se instancia la clase MySQLAccess
-			MySQLAccess dao = new MySQLAccess();
+			ExamenBBDD dao = new ExamenBBDD();
 			dao.readDataBase();
 		} catch (Exception e) {
 			e.printStackTrace();
